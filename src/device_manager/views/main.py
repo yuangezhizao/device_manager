@@ -39,9 +39,9 @@ def auth_index():
     return flask.render_template('auth/index.html')
 
 
-@bp.route('/logout')
+@bp.route('/auth/logout')
 @login_required
-def logout():
+def auth_logout():
     logout_user()
     flask.flash('注销成功！', 'info')
     return flask.redirect(flask.url_for('bp.auth_index'))

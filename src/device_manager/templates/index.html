@@ -8,6 +8,23 @@
         <p>ALSI ES CANoe 设备管理系统</p>
     </div>
 
+    {% if current_user.is_authenticated %}
+        <div class="ui positive message">
+            <i class="close icon"></i>
+            <div class="header">欢迎，{{ current_user.name }}
+            </div>
+            {{ current_user.id }}，<a class="item" href="{{ url_for('main.auth_logout') }}"><i class="logout icon"></i>点此注销</a>
+        </div>
+    {% else %}
+        <div class="ui yellow message">
+            <i class="close icon"></i>
+            <div class="header">警告
+            </div>
+            未登录用户，
+            <a class="item" href="{{ url_for('main.auth_index') }}"><i class="sign in icon"></i>点此登录</a>
+        </div>
+    {% endif %}
+
     <h4 class="ui top attached block green header">
         转移
     </h4>
