@@ -14,7 +14,7 @@ class Device(db.Model):
     __tablename__ = 'device'
 
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.Integer)  # 设备类型
+    type = db.Column(db.VARCHAR(50))  # 设备类型
     serial = db.Column(db.VARCHAR(50), nullable=False)  # 设备序列号
     customer = db.Column(db.VARCHAR(50), nullable=False)  # 客户所有物
     now_person = db.Column(db.Integer)  # 当前所有者
