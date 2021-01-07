@@ -21,7 +21,7 @@ def site_index():
     return flask.render_template('index.html')
 
 
-@bp.route('/auth/index')
+@bp.route('/auth/index', methods=['GET', 'POST'])
 def auth_index():
     if current_user.is_authenticated:
         return flask.redirect(flask.url_for('bp.site_index'))
