@@ -1,0 +1,118 @@
+{% extends "/base.html" %}
+
+{% block title %}管理 - 全部设备{% endblock %}
+
+{% block body %}
+    <div class="ui centered grid">
+        <div class="ten wide computer column">
+            <div class="ui blue pointing menu">
+                <a class="active item"><i class="circle icon"></i>管理 - 全部设备</a>
+                <a class="item" href="{{ url_for('main.site_index') }}"><i class="arrow left icon"></i>返回首页</a>
+            </div>
+
+            <div class="ui dividing blue header">
+                <div class="content">
+                    <h2>全部设备</h2>
+                </div>
+            </div>
+
+            <table id="table" class="ui compact sortable celled unstackable striped blue table">
+                <thead>
+                <tr class="positive">
+                    <th>No.</th>
+                    <th>设备类型</th>
+                    <th>设备序列号</th>
+                    <th>客户所有物</th>
+                    <th>当前所有者</th>
+                    <th>下个所有者</th>
+                    <th>所有者状态</th>
+                    <th>设备状态</th>
+                    <th>备注</th>
+                    <th>插入时间</th>
+                    <th>更新时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in manage_index_data %}
+                    <tr>
+                        <td>
+                            {{ data.id }}
+                        </td>
+                        <td>
+                            {{ data.type }}
+                        </td>
+                        <td>
+                            {{ data.serial }}
+                        </td>
+                        <td>
+                            {{ data.customer }}
+                        </td>
+                        <td>
+                            {% if data.now_person != None %}
+                                {{ data.now_person }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if data.next_person != None %}
+                                {{ data.next_person }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td {% if data.person_status %}class="{% if data.person_status == 1 %}positive{% elif data.person_status == 2 %}warning{% else %}negative{% endif %} single line"{% endif %}>
+                            {% if data.person_status != None %}
+                                {% if data.person_status == 0 %}
+                                    所有者从未转移
+                                {% elif data.person_status == 1 %}
+                                    所有者转移开始
+                                {% elif data.person_status == 2 %}
+                                    所有者转移结束
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if data.device_status != None %}
+                                {% if data.device_status == 0 %}
+                                    设备状态未上报
+                                {% elif data.device_status == 1 %}
+                                    设备正在使用中
+                                {% elif data.device_status == 2 %}
+                                    设备已停止使用
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ data.tips }}
+                        </td>
+                        <td>
+                            {{ data.insert_time }}
+                        </td>
+                        <td>
+                            {{ data.update_time }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="ui divider"></div>
+            <footer>
+                <div class="ui info message" style="text-align: center;">
+                    yuangezhizao&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2020~2021<br>
+                    Powered by Tencent Cloud Serverless
+                </div>
+            </footer>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/tablesorter/dist/js/jquery.tablesorter.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                $("#table").tablesorter();
+            }
+        );
+    </script>
+{% endblock %}
