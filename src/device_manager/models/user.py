@@ -1,0 +1,42 @@
+#!/usr/bin/env/ python3
+# -*- coding: utf-8 -*-
+"""
+    :Author: yuangezhizao
+    :Time: 2021/1/7 20:51
+    :Site: https://www.yuangezhizao.cn
+    :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
+"""
+import datetime
+
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from device_manager.plugins.extensions import db
+
+
+class User(db.Model, UserMixin):
+    __bind_key__ = 'alsi'
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, index=True)
+    password_hash = db.Column(db.String(128))
+    name = db.Column(db.String(30))
+    about_me = db.Column(db.Text())
+    member_since = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+
+    def __repr__(self):
+        return f'<User {self.username}>'
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def validate_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def ping(self):
+        self.last_seen = datetime.datetime.utcnow()
+        db.session.commit()
