@@ -60,6 +60,9 @@ def register_blueprints(app):
     from device_manager.views import register_views
     register_views(app)
 
+    from device_manager.plugins.admin import admin
+    admin.init_app(app)
+
 
 def register_template_context(app):
     @app.before_request
