@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
     __bind_key__ = 'alsi'
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True)
-    password_hash = db.Column(db.String(128))
-    name = db.Column(db.String(50))
+    username = db.Column(db.VARCHAR(50), unique=True)
+    password_hash = db.Column(db.VARCHAR(128))
+    name = db.Column(db.VARCHAR(50))
     member_since = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
 
