@@ -49,9 +49,10 @@ def register_extensions(app):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
-    from device_manager.plugins.extensions import db, compress
+    from device_manager.plugins.extensions import db, login_manager, compress
 
     db.init_app(app)
+    login_manager.init_app(app)
     compress.init_app(app)
 
 
