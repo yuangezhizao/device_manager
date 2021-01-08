@@ -12,7 +12,13 @@ app = flask.current_app
 
 class AdminIndexViewAuth(AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.username in ('ASDL1B1DL033', 'ASDL1B8DL002'):
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         return flask.redirect(flask.url_for('main.auth_index'))
@@ -22,7 +28,13 @@ class ModelViewAuth(ModelView):
     column_display_pk = True
 
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.username in ('ASDL1B1DL033', 'ASDL1B8DL002'):
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self, name, **kwargs):
         return flask.redirect(flask.url_for('main.auth_index'))
