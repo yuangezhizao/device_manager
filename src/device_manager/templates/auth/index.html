@@ -46,3 +46,33 @@
         </form>
     </div>
 {% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.ui.form').form({
+                fields: {
+                    username: {
+                        identifier: 'username',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: '请填写用户名'
+                            }
+                        ]
+                    },
+                    password: {
+                        identifier: 'password',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: '请填写密码'
+                            }
+                        ]
+                    }
+                },
+                inline: true
+            })
+        });
+    </script>
+{% endblock %}
