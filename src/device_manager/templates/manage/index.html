@@ -61,7 +61,7 @@
                                 -
                             {% endif %}
                         </td>
-                        <td {% if data.person_status %}class="{% if data.person_status == 1 %}positive{% elif data.person_status == 2 %}warning{% else %}negative{% endif %} single line"{% endif %}>
+                        <td {% if data.person_status != None %}class="{% if data.person_status == 1 %}positive{% elif data.person_status == 2 %}warning{% else %}negative{% endif %} single line"{% endif %}>
                             {% if data.person_status != None %}
                                 {% if data.person_status == 0 %}
                                     所有者从未转移
