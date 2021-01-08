@@ -17,11 +17,15 @@ class Device(db.Model):
     type = db.Column(db.VARCHAR(50))  # 设备类型
     serial = db.Column(db.VARCHAR(50), nullable=False)  # 设备序列号
     customer = db.Column(db.VARCHAR(50), nullable=False)  # 客户所有物
-    now_person = db.Column(db.Integer)  # 当前所有者
-    next_person = db.Column(db.Integer)  # 下个所有者
+    now_person_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # 当前所有者
+    now_person = db.relationship('User', foreign_keys=[now_person_id])
+
+    next_person_id = db.Column(db.Integer, db.ForeignKey('users.id'))  # 下个所有者
+    next_person = db.relationship('User', foreign_keys=[next_person_id])
+
     # TODO：所有者存储是否足够
-    person_status = db.Column(db.Integer)  # 所有者状态
-    device_status = db.Column(db.Integer)  # 设备状态
+    person_status = db.Column(db.Integer, default=0)  # 所有者状态
+    device_status = db.Column(db.Integer, default=0)  # 设备状态
     # TODO：关联表
     tips = db.Column(db.VARCHAR(255))  # 备注
     insert_time = db.Column(db.DateTime)
