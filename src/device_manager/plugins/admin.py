@@ -26,8 +26,8 @@ class AdminIndexViewAuth(AdminIndexView):
 
 class DeviceModelViewAuth(ModelView):
     column_display_pk = True
-    column_labels = dict(id='No.', type='【必填】设备类型', serial='【必填】设备序列号', customer='【必填】顾客所有物', now_person='【非必填】当前所有者',
-                         next_person='【非必填】下个所有者', device_available_status='设备可用性状态', device_online_status='设备在线状态',
+    column_labels = dict(id='No.', type='设备类型', serial='设备序列号', customer='顾客所有物', now_person='当前所有者',
+                         next_person='下个所有者', device_available_status='设备可用性状态', device_online_status='设备在线状态',
                          tips='备注', insert_time='插入时间', update_time='更新时间')
 
     def is_accessible(self):
