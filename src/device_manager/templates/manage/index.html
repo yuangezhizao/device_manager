@@ -25,10 +25,10 @@
                     <th>客户所有物</th>
                     <th>当前所有者</th>
                     <th>下个所有者</th>
-                    <th>所有者状态</th>
-                    <th>设备状态</th>
+                    <th>设备可用性状态</th>
+                    <th>设备在线状态</th>
                     <th>备注</th>
-                    <th>插入时间</th>
+                    {#                    <th>插入时间</th>#}
                     <th>更新时间</th>
                 </tr>
                 </thead>
@@ -42,7 +42,7 @@
                             {{ data.type }}
                         </td>
                         <td>
-                            {{ data.serial }}
+                            <a href="{{ url_for('main.transfer_device') }}?serial={{ data.serial }}">{{ data.serial }}</a>
                         </td>
                         <td>
                             {{ data.customer }}
@@ -61,24 +61,26 @@
                                 -
                             {% endif %}
                         </td>
-                        <td {% if data.person_status != None %}class="{% if data.person_status == 1 %}positive{% elif data.person_status == 2 %}warning{% else %}negative{% endif %} single line"{% endif %}>
-                            {% if data.person_status != None %}
-                                {% if data.person_status == 0 %}
-                                    所有者从未转移
-                                {% elif data.person_status == 1 %}
-                                    所有者转移开始
-                                {% elif data.person_status == 2 %}
-                                    所有者转移结束
+                        <td {% if data.device_available_status != None %}class="{% if data.device_available_status == 0 %}positive{% else %}negative{% endif %} single line"{% endif %}>
+                            {% if data.device_available_status != None %}
+                                {% if data.device_available_status == 0 %}
+                                    设备可用
+                                {% elif data.device_available_status == 1 %}
+                                    设备损坏
+                                {% elif data.device_available_status == 2 %}
+                                    设备返还日本侧
+                                {% elif data.device_available_status == 3 %}
+                                    设备借出
                                 {% endif %}
                             {% endif %}
                         </td>
                         <td>
-                            {% if data.device_status != None %}
-                                {% if data.device_status == 0 %}
+                            {% if data.device_online_status != None %}
+                                {% if data.device_online_status == 0 %}
                                     设备状态未上报
-                                {% elif data.device_status == 1 %}
+                                {% elif data.device_online_status == 1 %}
                                     设备正在使用中
-                                {% elif data.device_status == 2 %}
+                                {% elif data.device_online_status == 2 %}
                                     设备已停止使用
                                 {% endif %}
                             {% endif %}
@@ -86,9 +88,9 @@
                         <td>
                             {{ data.tips }}
                         </td>
-                        <td>
-                            {{ data.insert_time }}
-                        </td>
+                        {#                        <td>#}
+                        {#                            {{ data.insert_time }}#}
+                        {#                        </td>#}
                         <td>
                             {{ data.update_time }}
                         </td>
