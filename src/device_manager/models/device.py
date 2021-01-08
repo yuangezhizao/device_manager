@@ -6,6 +6,8 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
 """
+import datetime
+
 from device_manager.plugins.extensions import db
 
 
@@ -28,8 +30,8 @@ class Device(db.Model):
     device_online_status = db.Column(db.Integer, default=0)  # 设备在线状态
     # TODO：关联表
     tips = db.Column(db.VARCHAR(255))  # 备注
-    insert_time = db.Column(db.DateTime)
-    update_time = db.Column(db.DateTime)
+    insert_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    update_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     def save(self):
         db.session.add(self)
