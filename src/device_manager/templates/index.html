@@ -9,11 +9,39 @@
     </div>
 
     {% if current_user.is_authenticated %}
-        <div class="ui positive message">
-            <i class="close icon"></i>
-            <div class="header">欢迎，{{ current_user.name }}
-            </div>
-            {{ current_user.id }}，<a class="item" href="{{ url_for('main.auth_logout') }}"><i class="logout icon"></i>点此注销</a>
+        <h4 class="ui top attached block blue header">
+            我的
+        </h4>
+        <div class="ui bottom attached blue segment">
+            你好，<b>{{ current_user.name }}</b>
+            <br>
+            {% if my_now_device_data %}
+                <br>
+                ① 以下是你在使用的设备：
+                <br>
+                <br>
+                {% for my_now_device in my_now_device_data %}
+                    <a class="ui mini green button"
+                       href="{{ url_for('main.transfer_device') }}?serial={{ my_now_device.serial }}">{{ my_now_device.serial }}</a>
+                {% endfor %}
+            {% else %}
+                <br>
+                ① 你暂无在使用的设备
+            {% endif %}
+            <br>
+            {% if my_next_device_data %}
+                <br>
+                ② 以下是你需要确认的设备：
+                <br>
+                <br>
+                {% for my_next_device in my_next_device_data %}
+                    <a class="ui mini blue button"
+                       href="{{ url_for('main.transfer_device') }}?serial={{ my_next_device.serial }}">{{ my_next_device.serial }}</a>
+                {% endfor %}
+            {% else %}
+                <br>
+                ② 你暂无需要确认的设备
+            {% endif %}
         </div>
     {% else %}
         <div class="ui yellow message">
@@ -24,13 +52,6 @@
             <a class="item" href="{{ url_for('main.auth_index') }}"><i class="sign in icon"></i>点此登录</a>
         </div>
     {% endif %}
-
-    <h4 class="ui top attached block green header">
-        转移
-    </h4>
-    <div class="ui bottom attached green segment">
-        <a href="{{ url_for('main.transfer_index') }}">设备转移</a>
-    </div>
 
     <h4 class="ui top attached block brown header">
         管理

@@ -1,0 +1,157 @@
+{% extends "/base.html" %}
+
+{% block title %}设备详情{% endblock %}
+
+{% block body %}
+    <div class="ui centered grid">
+        <div class="ten wide computer column">
+            <div class="ui blue pointing menu">
+                <a class="active item"><i class="circle icon"></i>设备详情</a>
+                <a class="item" href="{{ url_for('main.manage_index') }}"><i class="arrow left icon"></i>返回全部设备</a>
+                <a class="item" href="{{ url_for('main.site_index') }}"><i class="arrow left icon"></i>返回首页</a>
+            </div>
+
+            <div class="ui tall stacked segment">
+                <div class="ui divided items">
+                    <div class="item">
+                        <div class="content">
+                            <h3>设备详情</h3>
+                            <div class="ui divided selection list">
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">设备类型</div>
+                                    {{ transfer_device_data.type }}
+                                </div>
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">设备序列号</div>
+                                    {{ transfer_device_data.serial }}
+                                </div>
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">客户所有物</div>
+                                    {{ transfer_device_data.customer }}
+                                </div>
+                                <div class="ui attached brown segment">
+                                    <div class="ui brown horizontal label">当前所有者</div>
+                                    {% if transfer_device_data.now_person != None %}
+                                        {{ transfer_device_data.now_person }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </div>
+                                <div class="ui attached brown segment">
+                                    <div class="ui brown horizontal label">下个所有者</div>
+                                    {% if transfer_device_data.next_person != None %}
+                                        {{ transfer_device_data.next_person }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </div>
+                                <div class="ui attached blue segment">
+                                    <div class="ui blue horizontal label">设备物理状态</div>
+                                    {% if transfer_device_data.device_available_status != None %}
+                                        {% if transfer_device_data.device_available_status == 0 %}
+                                            设备正常
+                                        {% elif transfer_device_data.device_available_status == 1 %}
+                                            设备损坏
+                                        {% elif transfer_device_data.device_available_status == 2 %}
+                                            设备返还日本侧
+                                        {% elif transfer_device_data.device_available_status == 3 %}
+                                            设备借出
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="ui attached blue segment">
+                                    <div class="ui blue horizontal label">设备在线状态</div>
+                                    {% if transfer_device_data.device_online_status != None %}
+                                        {% if transfer_device_data.device_online_status == 0 %}
+                                            设备状态未上报
+                                        {% elif transfer_device_data.device_online_status == 1 %}
+                                            设备正在使用中
+                                        {% elif transfer_device_data.device_online_status == 2 %}
+                                            设备已停止使用
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="ui attached pink segment">
+                                    <div class="ui pink horizontal label">备注</div>
+                                    {{ transfer_device_data.tips }}
+                                </div>
+                                <div class="ui attached pink segment">
+                                    <div class="ui pink horizontal label">更新时间</div>
+                                    {{ transfer_device_data.update_time }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui tall stacked segment">
+                <h3>转移操作</h3>
+                {% if current_user == transfer_device_data.now_person %}
+                    {% if transfer_device_data.device_available_status == 0 %}
+                        <form class="ui inline" method="post" action="">
+                            <input name="func" value="start_transfer" type="hidden">
+                            <div class="field">
+                                <label>转移用户至</label>
+                                <div class="ui selection search selection dropdown">
+                                    <input name="next_user" type="hidden">
+                                    <div class="default text">请选择</div>
+                                    <div class="menu">
+                                        {% for user in user_all %}
+                                            {% if user != current_user %}
+                                                <div class="item"
+                                                     data-value="{{ user.username }}">{{ user.name }}[{{ user.username }}]
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="ui small purple submit button" type="submit" name="submit" value="确认转移">
+                        </form>
+                    {% else %}
+                        设备物理状态异常，无法进行转移
+                    {% endif %}
+                {% else %}
+                    这不是你的设备，无法进行转移
+                {% endif %}
+            </div>
+            <div class="ui tall stacked segment">
+                <h3>接收操作</h3>
+                {% if current_user == transfer_device_data.next_person %}
+                    {% if transfer_device_data.device_available_status == 0 %}
+                        <form class="ui inline" method="post" action="">
+                            <input name="func" value="stop_transfer" type="hidden">
+                            <button class="ui animated fade positive button" name="transfer_confirm" value="1">
+                                <div class="visible content">确认接收</div>
+                                <div class="hidden content">
+                                    <i class="check circle outline icon"></i>
+                                </div>
+                            </button>
+                        </form>
+                    {% else %}
+                        设备物理状态异常，无法进行接收
+                    {% endif %}
+                {% else %}
+                    这没有分配给你，无法进行接收
+                {% endif %}
+            </div>
+            <footer>
+                <div class="ui info message" style="text-align: center;">
+                    yuangezhizao&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2020~2021<br>
+                    Powered by Tencent Cloud Serverless
+                </div>
+            </footer>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/tablesorter/dist/js/jquery.tablesorter.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                $("#table").tablesorter();
+            }
+        );
+    </script>
+{% endblock %}
