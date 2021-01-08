@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="ui centered grid">
-        <div class="ten wide computer column">
+        <div class="column">
             <div class="ui blue pointing menu">
                 <a class="active item"><i class="circle icon"></i>管理 - 全部设备</a>
                 <a class="item" href="{{ url_for('main.site_index') }}"><i class="arrow left icon"></i>返回首页</a>
@@ -28,7 +28,7 @@
                     <th>设备可用性状态</th>
                     <th>设备在线状态</th>
                     <th>备注</th>
-                    {#                    <th>插入时间</th>#}
+                    {#                    <th>创建时间</th>#}
                     <th>更新时间</th>
                 </tr>
                 </thead>
@@ -64,7 +64,7 @@
                         <td {% if data.device_available_status != None %}class="{% if data.device_available_status == 0 %}positive{% else %}negative{% endif %} single line"{% endif %}>
                             {% if data.device_available_status != None %}
                                 {% if data.device_available_status == 0 %}
-                                    设备可用
+                                    设备完好
                                 {% elif data.device_available_status == 1 %}
                                     设备损坏
                                 {% elif data.device_available_status == 2 %}
@@ -89,7 +89,7 @@
                             {{ data.tips }}
                         </td>
                         {#                        <td>#}
-                        {#                            {{ data.insert_time }}#}
+                        {#                            {{ data.create_time }}#}
                         {#                        </td>#}
                         <td>
                             {{ data.update_time }}
