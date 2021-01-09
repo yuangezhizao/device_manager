@@ -1,3 +1,11 @@
+#!/usr/bin/env/ python3
+# -*- coding: utf-8 -*-
+"""
+    :Author: yuangezhizao-workaccount
+    :Time: 2021/1/9 10:09
+    :Site: https://www.yuangezhizao.cn
+    :Copyright: © 2020 yuangezhizao <root@yuangezhizao.cn>
+"""
 import flask
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
