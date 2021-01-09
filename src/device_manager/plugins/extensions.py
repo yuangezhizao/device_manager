@@ -6,14 +6,14 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
 """
-from flask_compress import Compress
+# from flask_compress import Compress
 from flask_login import LoginManager, AnonymousUserMixin
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 
 login_manager = LoginManager()
 db = SQLAlchemy()
-compress = Compress()
+# compress = Compress()
 mail = Mail()
 
 
