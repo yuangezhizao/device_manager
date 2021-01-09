@@ -11,6 +11,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 from device_manager.models.device import Device
 from device_manager.models.user import User
+from device_manager.plugins.send_email import send_transfer_email, send_confirm_email
 
 app = flask.current_app
 bp = flask.Blueprint('main', __name__)
@@ -68,6 +69,10 @@ def transfer_device():
             next_user = User.query.filter_by(username=next_user_id).first_or_404()
             transfer_device_data.next_person = next_user
             transfer_device_data.save()
+            try:
+                send_transfer_email(serial, next_user.email, current_user.email)
+            except Exception as e:
+                print(e)
             return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
         elif func == 'stop_transfer':
             transfer_confirm = flask.request.form.get('transfer_confirm')
@@ -75,9 +80,15 @@ def transfer_device():
                 if transfer_device_data.next_person != current_user:
                     return '此设备并不需要你进行确认'
                 next_user = transfer_device_data.next_person
+                now_person = transfer_device_data.now_person
+                # 邮件提醒
                 transfer_device_data.now_person = next_user
                 transfer_device_data.next_person = None
                 transfer_device_data.save()
+                try:
+                    send_confirm_email(serial, now_person.email, current_user.email)
+                except Exception as e:
+                    print(e)
                 if 'transfer' not in flask.request.referrer:
                     return flask.redirect(flask.url_for('main.site_index'))
                 return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
