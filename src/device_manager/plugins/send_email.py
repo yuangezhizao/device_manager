@@ -13,8 +13,6 @@ from flask_mail import Message
 
 from device_manager.plugins.extensions import mail
 
-app = flask.current_app
-
 
 def async_send_mail(app, msg):
     with app.app_context():
@@ -27,6 +25,7 @@ def send_transfer_email(serial, recipients, cc):
                   recipients=[recipients],
                   cc=cc)
     msg.body = f'序列号为【{serial}】的 CANoe 设备开始转移，请及时确认<br>详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
+    app = flask.current_app._get_current_object()
     thread = Thread(target=async_send_mail, args=(app, msg))
     thread.start()
 
@@ -37,5 +36,6 @@ def send_confirm_email(serial, recipients, cc):
                   recipients=[recipients],
                   cc=cc)
     msg.body = f'序列号为【{serial}】的 CANoe 设备已转移结束<br>详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
+    app = flask.current_app._get_current_object()
     thread = Thread(target=async_send_mail, args=(app, msg))
     thread.start()
