@@ -2,3 +2,4 @@ Flask
 Flask-Login
 Flask-SQLAlchemy
 Flask-Admin
+Flask-Mail

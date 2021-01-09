@@ -8,11 +8,13 @@
 """
 from flask_compress import Compress
 from flask_login import LoginManager, AnonymousUserMixin
+from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 
 login_manager = LoginManager()
 db = SQLAlchemy()
 compress = Compress()
+mail = Mail()
 
 
 @login_manager.user_loader
