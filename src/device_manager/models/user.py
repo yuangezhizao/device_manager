@@ -9,7 +9,6 @@
 import datetime
 
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
 
 from device_manager.plugins.extensions import db
 
@@ -32,10 +31,15 @@ class User(db.Model, UserMixin):
         return f'<User {self.username, self.name}>'
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        # from werkzeug.security import generate_password_hash
+        # self.password_hash = generate_password_hash(password)
+        self.password_hash = password
 
     def validate_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        # from werkzeug.security import check_password_hash
+        # return check_password_hash(self.password_hash, password)
+        from werkzeug.security import safe_str_cmp
+        return safe_str_cmp(self.password_hash, password)
 
     def ping(self):
         self.last_seen = datetime.datetime.utcnow()
