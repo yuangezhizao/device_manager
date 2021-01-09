@@ -22,6 +22,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.VARCHAR(50), unique=True)
     password_hash = db.Column(db.VARCHAR(128))
     name = db.Column(db.VARCHAR(50))
+    backup_1 = db.Column(db.VARCHAR(255))  # 备用字段 1
+    backup_2 = db.Column(db.VARCHAR(255))  # 备用字段 2
+    backup_3 = db.Column(db.VARCHAR(255))  # 备用字段 3
     member_since = db.Column(db.DateTime(), server_default=func.now())
     last_seen = db.Column(db.DateTime(), server_default=func.now(), onupdate=func.now())
 

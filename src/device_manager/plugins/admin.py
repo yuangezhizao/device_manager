@@ -28,7 +28,8 @@ class DeviceModelViewAuth(ModelView):
     column_display_pk = True
     column_labels = dict(id='No.', type='设备类型', serial='设备序列号', customer='顾客所有物', now_person='当前所有者',
                          next_person='下个所有者', device_available_status='设备物理状态', device_online_status='设备在线状态',
-                         tips='备注', create_time='创建时间', update_time='更新时间')
+                         tips='备注', backup_1='备用字段 1', backup_2='备用字段 2', backup_3='备用字段 3',
+                         create_time='创建时间', update_time='更新时间')
 
     def is_accessible(self):
         if current_user.is_authenticated:
@@ -45,8 +46,8 @@ class DeviceModelViewAuth(ModelView):
 
 class UserModelViewAuth(ModelView):
     column_display_pk = True
-    column_labels = dict(id='No.', username='用户名', password_hash='密码哈希', name='昵称', member_since='注册时间',
-                         last_seen='上次在线时间')
+    column_labels = dict(id='No.', username='用户名', password_hash='密码', name='昵称', backup_1='备用字段 1',
+                         backup_2='备用字段 2', backup_3='备用字段 3', member_since='注册时间', last_seen='上次在线时间')
 
     def is_accessible(self):
         if current_user.is_authenticated:

@@ -30,6 +30,9 @@ class Device(db.Model):
     device_online_status = db.Column(db.Integer, default=0)  # 设备在线状态：0，设备状态未上报；1，设备正在使用中；2，设备已停止使用
     # TODO：关联表
     tips = db.Column(db.VARCHAR(255))  # 备注
+    backup_1 = db.Column(db.VARCHAR(255))  # 备用字段 1
+    backup_2 = db.Column(db.VARCHAR(255))  # 备用字段 2
+    backup_3 = db.Column(db.VARCHAR(255))  # 备用字段 3
     create_time = db.Column(db.DateTime, server_default=func.now())
     update_time = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
 
