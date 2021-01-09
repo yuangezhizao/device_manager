@@ -26,8 +26,8 @@ class Device(db.Model):
     next_person = db.relationship('User', foreign_keys=[next_person_id])
 
     # TODO：所有者存储是否足够
-    device_available_status = db.Column(db.Integer, default=0)  # 设备物理状态
-    device_online_status = db.Column(db.Integer, default=0)  # 设备在线状态
+    device_available_status = db.Column(db.Integer, default=0)  # 设备物理状态：0，设备完好；1，设备损坏；2，设备返还日本侧；3，设备借出
+    device_online_status = db.Column(db.Integer, default=0)  # 设备在线状态：0，设备状态未上报；1，设备正在使用中；2，设备已停止使用
     # TODO：关联表
     tips = db.Column(db.VARCHAR(255))  # 备注
     create_time = db.Column(db.DateTime, server_default=func.now())

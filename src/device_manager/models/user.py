@@ -9,6 +9,7 @@
 import datetime
 
 from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 from device_manager.plugins.extensions import db
 
@@ -21,8 +22,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.VARCHAR(50), unique=True)
     password_hash = db.Column(db.VARCHAR(128))
     name = db.Column(db.VARCHAR(50))
-    member_since = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    member_since = db.Column(db.DateTime(), server_default=func.now())
+    last_seen = db.Column(db.DateTime(), server_default=func.now(), onupdate=func.now())
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
