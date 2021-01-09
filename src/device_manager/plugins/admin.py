@@ -54,7 +54,7 @@ class DeviceModelViewAuth(ModelView):
 
 class UserModelViewAuth(ModelView):
     column_display_pk = True
-    column_labels = dict(id='No.', username='用户名', password_hash='密码', name='昵称', backup_1='备用字段 1',
+    column_labels = dict(id='No.', username='用户 ID', email='电子邮箱', password_hash='密码', name='昵称', backup_1='备用字段 1',
                          backup_2='备用字段 2', backup_3='备用字段 3', member_since='注册时间', last_seen='上次在线时间')
 
     def is_accessible(self):

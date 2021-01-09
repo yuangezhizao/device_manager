@@ -18,10 +18,10 @@ class User(db.Model, UserMixin):
     __bind_key__ = 'alsi'
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.VARCHAR(50), unique=True)
-    email = db.Column(db.VARCHAR(50), unique=True)
-    password_hash = db.Column(db.VARCHAR(128))
-    name = db.Column(db.VARCHAR(50))
+    username = db.Column(db.VARCHAR(50), unique=True, nullable=False)
+    email = db.Column(db.VARCHAR(50), unique=True, nullable=False)
+    password_hash = db.Column(db.VARCHAR(128), nullable=False)
+    name = db.Column(db.VARCHAR(50), nullable=False)
     backup_1 = db.Column(db.VARCHAR(255))  # 备用字段 1
     backup_2 = db.Column(db.VARCHAR(255))  # 备用字段 2
     backup_3 = db.Column(db.VARCHAR(255))  # 备用字段 3

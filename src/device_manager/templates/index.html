@@ -17,7 +17,7 @@
             <br>
             {% if my_now_device_data %}
                 <br>
-                ① 以下是你在使用的设备：
+                ① 以下是你拥有的设备：
                 <br>
                 <br>
                 {% for my_now_device in my_now_device_data %}
@@ -26,21 +26,47 @@
                 {% endfor %}
             {% else %}
                 <br>
-                ① 你暂无在使用的设备
+                ① 你暂无拥有的设备
             {% endif %}
             <br>
             {% if my_next_device_data %}
                 <br>
                 ② 以下是你需要确认的设备：
-                <br>
-                <br>
-                {% for my_next_device in my_next_device_data %}
-                    <a class="ui mini blue button"
-                       href="{{ url_for('main.transfer_device') }}?serial={{ my_next_device.serial }}">{{ my_next_device.serial }}</a>
-                {% endfor %}
-            {% else %}
-                <br>
-                ② 你暂无需要确认的设备
+                <table class="ui very compact collapsing table">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>设备序列号</th>
+                        <th>设备来自</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for my_next_device in my_next_device_data %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td><a class="ui mini blue button"
+                                   href="{{ url_for('main.transfer_device') }}?serial={{ my_next_device.serial }}">
+                                {{ my_next_device.serial }}</a></td>
+                            <td>{{ my_next_device.now_person }}</td>
+                            <td>{% if my_next_device.device_available_status == 0 %}
+                                <form class="ui inline" method="post"
+                                      action="{{ url_for('main.transfer_device') }}?serial={{ my_next_device.serial }}">
+                                    <input name="func" value="stop_transfer" type="hidden">
+                                    <button class="ui animated fade positive mini button" name="transfer_confirm"
+                                            value="1">
+                                        <div class="visible content">确认接收{{ my_next_device.serial }}</div>
+                                        <div class="hidden content">
+                                            <i class="check circle outline icon"></i>
+                                        </div>
+                                    </button>
+                                </form>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             {% endif %}
         </div>
     {% else %}
