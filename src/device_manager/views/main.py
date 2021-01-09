@@ -78,6 +78,8 @@ def transfer_device():
                 transfer_device_data.now_person = next_user
                 transfer_device_data.next_person = None
                 transfer_device_data.save()
+                if 'transfer' not in flask.request.referrer:
+                    return flask.redirect(flask.url_for('main.site_index'))
                 return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
     user_all = User.query.order_by(User.id.asc()).all()
     return flask.render_template('transfer/device.html', transfer_device_data=transfer_device_data, user_all=user_all)
