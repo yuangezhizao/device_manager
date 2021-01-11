@@ -29,10 +29,22 @@
                                     <div class="ui black horizontal label">客户所有物</div>
                                     {{ transfer_device_data.customer }}
                                 </div>
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">设备授权</div>
+                                    {{ transfer_device_data.license }}
+                                </div>
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">CAN 通道数量</div>
+                                    {{ transfer_device_data.can_count }}
+                                </div>
+                                <div class="ui attached black segment">
+                                    <div class="ui black horizontal label">LIN 通道数量</div>
+                                    {{ transfer_device_data.lin_count }}
+                                </div>
                                 <div class="ui attached brown segment">
                                     <div class="ui brown horizontal label">当前所有者</div>
                                     {% if transfer_device_data.now_person != None %}
-                                        {{ transfer_device_data.now_person }}
+                                        {{ transfer_device_data.now_person.name }}
                                     {% else %}
                                         -
                                     {% endif %}
@@ -40,7 +52,7 @@
                                 <div class="ui attached brown segment">
                                     <div class="ui brown horizontal label">下个所有者</div>
                                     {% if transfer_device_data.next_person != None %}
-                                        {{ transfer_device_data.next_person }}
+                                        {{ transfer_device_data.next_person.name }}
                                     {% else %}
                                         -
                                     {% endif %}
