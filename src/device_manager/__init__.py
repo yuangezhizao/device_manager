@@ -50,13 +50,14 @@ def register_extensions(app):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
-    from device_manager.plugins.extensions import db, login_manager, mail
+    from device_manager.plugins.extensions import db, login_manager, mail, migrate
 
     db.init_app(app)
     login_manager.init_app(app)
     # from device_manager.plugins.extensions import compress
     # compress.init_app(app)
     mail.init_app(app)
+    migrate.init_app(app, db)
 
 
 def register_blueprints(app):
