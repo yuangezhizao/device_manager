@@ -13,6 +13,9 @@ import flask
 from flask_login import current_user
 
 from config import config
+from device_manager.models.device import Device
+from device_manager.models.user import User
+from device_manager.plugins.extensions import db, login_manager, mail, migrate
 
 
 class ReverseProxied(object):
@@ -50,20 +53,12 @@ def register_extensions(app):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
-    from device_manager.plugins.extensions import db, login_manager, mail, migrate
-
     db.init_app(app)
     login_manager.init_app(app)
     # from device_manager.plugins.extensions import compress
     # compress.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
-
-    @app.shell_context_processor
-    def make_shell_context():
-        from device_manager.models.user import User
-        from device_manager.models.device import Device
-        return dict(app=app, db=db, User=User, Device=Device)
 
 
 def register_blueprints(app):
@@ -92,3 +87,9 @@ def register_template_context(app):
     @app.template_filter('my_split')
     def my_split(this, string, num):
         return str(this).split(string)[num]
+
+
+def register_shell_context(app):
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(db=db, User=User, Device=Device)
