@@ -101,3 +101,13 @@ def transfer_device():
 def manage_index():
     manage_index_data = Device.query.order_by(Device.id.asc()).all()
     return flask.render_template('manage/index.html', manage_index_data=manage_index_data)
+
+
+@bp.route('/report')
+def report():
+    serial = flask.request.args.get('serial')
+    status = int(flask.request.args.get('status', 1))
+    device = Device.query.filter_by(serial=serial).first_or_404()
+    device.device_online_status = status
+    device.save()
+    return f'序列号为【{serial}】的 CANoe 设备在线状态已更新为：{status}'
