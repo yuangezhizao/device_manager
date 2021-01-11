@@ -12,7 +12,6 @@ from device_manager.plugins.extensions import db
 
 
 class Device(db.Model):
-    __bind_key__ = 'alsi'
     __tablename__ = 'device'
 
     id = db.Column(db.Integer, primary_key=True)

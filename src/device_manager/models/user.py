@@ -15,7 +15,6 @@ from device_manager.plugins.extensions import db
 
 
 class User(db.Model, UserMixin):
-    __bind_key__ = 'alsi'
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.VARCHAR(50), unique=True, nullable=False)
