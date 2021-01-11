@@ -55,6 +55,7 @@ def register_extensions(app):
 
     db.init_app(app)
     login_manager.init_app(app)
+    register_shell_context(app)
     # from device_manager.plugins.extensions import compress
     # compress.init_app(app)
     mail.init_app(app)
