@@ -59,6 +59,12 @@ def register_extensions(app):
     mail.init_app(app)
     migrate.init_app(app, db)
 
+    @app.shell_context_processor
+    def make_shell_context():
+        from device_manager.models.user import User
+        from device_manager.models.device import Device
+        return dict(app=app, db=db, User=User, Device=Device)
+
 
 def register_blueprints(app):
     from device_manager.views import register_views
