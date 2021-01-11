@@ -10,12 +10,14 @@
 from flask_login import LoginManager, AnonymousUserMixin
 from flask_mail import Mail
 from flask_migrate import Migrate
+from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 
 login_manager = LoginManager()
 db = SQLAlchemy()
 # compress = Compress()
 mail = Mail()
+moment = Moment()
 migrate = Migrate()
 
 

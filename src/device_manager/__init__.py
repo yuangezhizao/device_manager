@@ -15,7 +15,7 @@ from flask_login import current_user
 from config import config
 from device_manager.models.device import Device
 from device_manager.models.user import User
-from device_manager.plugins.extensions import db, login_manager, mail, migrate
+from device_manager.plugins.extensions import db, login_manager, mail, migrate, moment
 
 
 class ReverseProxied(object):
@@ -59,6 +59,7 @@ def register_extensions(app):
     # from device_manager.plugins.extensions import compress
     # compress.init_app(app)
     mail.init_app(app)
+    moment.init_app(app)
     migrate.init_app(app, db)
 
 
