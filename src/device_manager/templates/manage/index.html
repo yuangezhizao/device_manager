@@ -23,8 +23,11 @@
                     <th>设备类型</th>
                     <th>设备序列号</th>
                     <th>客户所有物</th>
+                    <th>设备授权</th>
+                    <th>CAN 通道数量</th>
+                    <th>LIN 通道数量</th>
                     <th>当前所有者</th>
-                    <th>下个所有者</th>
+                    {#                    <th>下个所有者</th>#}
                     <th>设备可用性状态</th>
                     <th>设备在线状态</th>
                     <th>备注</th>
@@ -48,19 +51,28 @@
                             {{ data.customer }}
                         </td>
                         <td>
-                            {% if data.now_person != None %}
-                                {{ data.now_person }}
-                            {% else %}
-                                -
-                            {% endif %}
+                            {{ data.license }}
                         </td>
                         <td>
-                            {% if data.next_person != None %}
-                                {{ data.next_person }}
+                            {{ data.can_count }}
+                        </td>
+                        <td>
+                            {{ data.lin_count }}
+                        </td>
+                        <td>
+                            {% if data.now_person != None %}
+                                {{ data.now_person.name }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
+                        {#                        <td>#}
+                        {#                            {% if data.next_person != None %}#}
+                        {#                                {{ data.next_person }}#}
+                        {#                            {% else %}#}
+                        {#                                -#}
+                        {#                            {% endif %}#}
+                        {#                        </td>#}
                         <td {% if data.device_available_status != None %}class="{% if data.device_available_status == 0 %}positive{% else %}negative{% endif %} single line"{% endif %}>
                             {% if data.device_available_status != None %}
                                 {% if data.device_available_status == 0 %}
