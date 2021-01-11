@@ -71,7 +71,8 @@ class UserModelViewAuth(ModelView):
         return flask.redirect(flask.url_for('main.auth_index'))
 
 
-admin = Admin(name='数据库管理', index_view=AdminIndexView(), template_mode='bootstrap3')
+admin = Admin(name='数据库管理', index_view=AdminIndexView(name='管理首页', template='/admin/index.html'),
+              template_mode='bootstrap3')
 
 admin.add_view(DeviceModelViewAuth(Device, db.session, name='设备表管理'))
 admin.add_view(UserModelViewAuth(User, db.session, name='用户表管理'))
