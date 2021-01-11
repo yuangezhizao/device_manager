@@ -104,7 +104,7 @@
                         {#                            {{ data.create_time }}#}
                         {#                        </td>#}
                         <td>
-                            {{ moment(data.update_time).format('LLL') }}
+                            {{ moment(data.update_time).format('YYYY-MM-DD HH:mm:ss a') }}
                         </td>
                     </tr>
                 {% endfor %}
