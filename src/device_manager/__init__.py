@@ -10,6 +10,7 @@ import os
 import time
 
 import flask
+from flask_login import current_user
 
 from config import config
 
@@ -69,6 +70,8 @@ def register_blueprints(app):
 def register_template_context(app):
     @app.before_request
     def before_request():
+        if current_user.is_authenticated:
+            current_user.ping()
         flask.g.start_time = time.time()
 
     @app.after_request
