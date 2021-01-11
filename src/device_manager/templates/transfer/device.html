@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="ui attached pink segment">
                                     <div class="ui pink horizontal label">更新时间</div>
-                                    {{ transfer_device_data.update_time }}
+                                    {{ moment(transfer_device_data.update_time).format('LLL') }}
                                 </div>
                             </div>
                         </div>
