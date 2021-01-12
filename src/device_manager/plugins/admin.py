@@ -43,7 +43,8 @@ class DeviceModelViewAuth(ModelView):
 
     def is_accessible(self):
         if current_user.is_authenticated:
-            if current_user.username in ('ASDL1B1DL033', 'ASDL1B8DL002'):
+            if current_user.username in (
+                    'ASDL1B1DL033', 'ASDL1B8DL002', 'ASDL1B8DL003', 'ASDL1B5DL037', 'ASDL1B8DL069'):
                 return True
             else:
                 return False
@@ -61,7 +62,8 @@ class UserModelViewAuth(ModelView):
 
     def is_accessible(self):
         if current_user.is_authenticated:
-            if current_user.username in ('ASDL1B1DL033', 'ASDL1B8DL002'):
+            if current_user.username in (
+                    'ASDL1B1DL033', 'ASDL1B8DL002', 'ASDL1B8DL003', 'ASDL1B5DL037', 'ASDL1B8DL069'):
                 return True
             else:
                 return False
