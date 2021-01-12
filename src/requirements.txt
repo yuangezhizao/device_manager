@@ -6,3 +6,4 @@ Flask-Mail
 Flask-Migrate
 Flask-Moment
 python-dotenv
+Flask-BabelEX
