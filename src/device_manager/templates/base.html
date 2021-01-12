@@ -40,18 +40,17 @@
         </footer>
     </div>
 {% endblock %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/static/js/jquery.min.js') }}">
-<link rel="stylesheet" type="text/css"
-      href="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.js') }}">
+<script src="{{ url_for('static', filename='/static/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.js') }}"></script>
 <script>
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');
     });
     $('.selection.dropdown').dropdown();
-    console.log('没错，控制台彩蛋（')
-    console.warn('小伙子你不要搞事情')
+    console.log('没错，控制台彩蛋（');
+    console.warn('小伙子你不要搞事情');
 </script>
 {% block script %}{% endblock %}
-{{ moment.include_moment() }}
+{{ moment.include_moment(local_js=url_for('static', filename='static/js/moment-with-locales.min.js')) }}
 </body>
 </html>
