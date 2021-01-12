@@ -72,13 +72,11 @@
                                     {% endif %}
                                 </div>
                                 <div class="ui attached blue segment">
-                                    <div class="ui blue horizontal label">设备在线状态</div>
-                                    {% if transfer_device_data.device_online_status != None %}
-                                        {% if transfer_device_data.device_online_status == 0 %}
-                                            设备状态未上报
-                                        {% elif transfer_device_data.device_online_status == 1 %}
-                                            设备正在使用中
-                                        {% endif %}
+                                    <div class="ui blue horizontal label">设备上次在线时间</div>
+                                    {% if transfer_device_data.device_online_time != None %}
+                                        {{ transfer_device_data.device_online_time }}
+                                    {% else %}
+                                        未知
                                     {% endif %}
                                 </div>
                                 <div class="ui attached pink segment">

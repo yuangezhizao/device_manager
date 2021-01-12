@@ -29,7 +29,7 @@
                     <th>当前所有者</th>
                     {#                    <th>下个所有者</th>#}
                     <th>设备可用性状态</th>
-                    <th>设备在线状态</th>
+                    <th>设备上次在线时间</th>
                     <th>备注</th>
                     {#                    <th>创建时间</th>#}
                     <th>更新时间</th>
@@ -87,14 +87,10 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if data.device_online_status != None %}
-                                {% if data.device_online_status == 0 %}
-                                    设备状态未上报
-                                {% elif data.device_online_status == 1 %}
-                                    设备正在使用中
-                                {% elif data.device_online_status == 2 %}
-                                    设备已停止使用
-                                {% endif %}
+                            {% if data.device_online_time != None %}
+                                {{ data.device_online_time }}
+                            {% else %}
+                                未知
                             {% endif %}
                         </td>
                         <td>
