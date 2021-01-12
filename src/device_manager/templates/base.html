@@ -34,7 +34,7 @@
         <div class="ui divider"></div>
         <footer>
             <div class="ui info message" style="text-align: center;">
-                ALSI&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2021<br>
+                ALSI&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2021
             </div>
         </footer>
     </div>
@@ -45,9 +45,9 @@
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');
     });
-    $('.selection.dropdown')
-        .dropdown()
-    ;
+    $('.selection.dropdown').dropdown();
+    console.log('没错，控制台彩蛋（')
+    console.warn('小伙子你不要搞事情')
 </script>
 {% block script %}{% endblock %}
 {{ moment.include_moment() }}
