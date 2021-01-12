@@ -28,7 +28,6 @@
             z-index: 1;
             position: relative
         }
-
     </style>
 </head>
 <body>
@@ -36,24 +35,34 @@
     <div class="ui blue pointing menu">
         <a class="active item"><i class="arrow up icon"></i>更新日志</a>
         <a class="item" href="/"><i class="arrow left icon"></i>返回首页</a>
-        <div class="right menu">
-            <a class="up item" href="/auth/index"><i class="sign in icon"></i>登录</a>
-        </div>
     </div>
+
     <div class="ui dividing header">
         <div class="content">
             <h2>更新日志</h2>
             <div class="sub header">当前 git 版本：<a style="color:#FF0000"
                                                  href="https://github.com/yuangezhizao/device_manager"
-                                                 target="_blank">e1edf6c</a>，总提交 <a
-                    style="color:#0000FF">90</a> 次
+                                                 target="_blank">552ebcf</a>，总提交 <a
+                    style="color:#0000FF">93</a> 次
             </div>
         </div>
     </div>
 
     <div id="log">
+        2021-01-12 23:10:47<br>
+        <b style="color:#FF0000"> 552ebcf</b>： 🚑 Quickfix(base.html): 补充提交
+
+        <br><br>
+        2021-01-12 23:00:28<br>
+        <b> d15531f</b>： 💄 UI(admin.py): 设备物理状态下拉菜单输入
+
+        <br><br>
+        2021-01-12 22:42:39<br>
+        <b> 7c83c12</b>： ✨ Feat(update.html): 静态化更新日志
+
+        <br><br>
         2021-01-12 22:29:44<br>
-        <b style="color:#FF0000"> e1edf6c</b>： 🚑 Quickfix(/static/static/semantic-ui-css-master): 修复引用
+        <b> e1edf6c</b>： 🚑 Quickfix(/static/static/semantic-ui-css-master): 修复引用
 
         <br><br>
         2021-01-12 22:21:36<br>
@@ -419,20 +428,17 @@
         </div>
     </footer>
 </div>
-<link rel="stylesheet" type="text/css" href="/static/js/jquery.min.js">
-<link rel="stylesheet" type="text/css"
-      href="/static/Semantic-UI-CSS-master/semantic.min.js">
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/Semantic-UI-CSS-master/semantic.min.js"></script>
 <script>
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');
     });
     $('.selection.dropdown').dropdown();
-    console.log('没错，控制台彩蛋（')
-    console.warn('小伙子你不要搞事情')
+    console.log('没错，控制台彩蛋（');
+    console.warn('小伙子你不要搞事情');
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
-        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
-        crossorigin="anonymous"></script>
+<script src="/static/js/moment-with-locales.min.js"></script>
 <script>
     moment.locale("en");
 
