@@ -34,7 +34,7 @@ class AdminIndexViewAuth(AdminIndexView):
 
 class DeviceModelViewAuth(ModelView):
     column_display_pk = True
-    column_labels = dict(id='No.', type='设备类型', serial='设备序列号', license='设备授权', can_count='CAN 通道数量',
+    column_labels = dict(id='No.', type='设备类型', serial='设备序列号', license='设备授权', can_count='CAN/FlexRay 通道数量',
                          lin_count='LIN 通道数量', customer='顾客所有物', now_person='当前所有者',
                          next_person='下个所有者', device_available_status='设备物理状态', device_online_status='设备在线状态',
                          tips='备注', backup_1='备用字段 1', backup_2='备用字段 2', backup_3='备用字段 3',
