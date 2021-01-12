@@ -6,6 +6,7 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
 """
+from flask_babelex import Babel
 # from flask_compress import Compress
 from flask_login import LoginManager, AnonymousUserMixin
 from flask_mail import Mail
@@ -19,6 +20,7 @@ db = SQLAlchemy()
 mail = Mail()
 moment = Moment()
 migrate = Migrate()
+babel = Babel()
 
 
 @login_manager.user_loader

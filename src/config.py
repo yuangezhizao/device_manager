@@ -27,6 +27,7 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'device_manager'
     SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'device_manger.db')
+    BABEL_DEFAULT_LOCALE = 'zh_CN'
 
 
 class DevelopmentConfig(BaseConfig):
