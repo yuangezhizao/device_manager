@@ -7,7 +7,8 @@
     <meta name="author" content="yuangezhizao"/>
     <meta name="Copyright" content="Copyright yuangezhizao All Rights Reserved."/>
     <meta name="format-detection" content="telephone=no"/>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.css') }}">
     <link rel="dns-prefetch" href="//lab.yuangezhizao.cn">
     <link rel="dns-prefetch" href="//www.yuangezhizao.cn">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
@@ -19,8 +20,8 @@
         <div class="ui blue pointing menu">
             {% block nav %}
                 <a class="active item"><i class="home icon"></i>首页</a>
-                <a class="item" href="https://github.com/yuangezhizao/device_manager" target="_blank"><i
-                        class="archive icon"></i>源码</a>
+                <a class="item" href="{{ url_for('static', filename='/static/html/update.html') }}"><i
+                        class="arrow up icon"></i>更新日志</a>
                 <div class="right menu">
                     {% if current_user.is_authenticated %}
                         <a class="item" href="{{ url_for('main.auth_logout') }}"><i class="sign out icon"></i>注销</a>
@@ -40,7 +41,8 @@
     </div>
 {% endblock %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/static/js/jquery.min.js') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.js') }}">
+<link rel="stylesheet" type="text/css"
+      href="{{ url_for('static', filename='/static/Semantic-UI-CSS-master/semantic.min.js') }}">
 <script>
     $('.message .close').on('click', function () {
         $(this).closest('.message').transition('fade');
