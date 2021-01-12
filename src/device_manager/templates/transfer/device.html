@@ -108,7 +108,7 @@
                                         {% for user in user_all %}
                                             {% if user != current_user %}
                                                 <div class="item"
-                                                     data-value="{{ user.username }}">{{ user.name }}[{{ user.username }}]
+                                                     data-value="{{ user.username }}">{{ user.name }}[{{ user.email | my_split('@', 0) }}]
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
