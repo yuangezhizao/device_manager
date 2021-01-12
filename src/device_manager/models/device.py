@@ -30,6 +30,8 @@ class Device(db.Model):
     # TODO：所有者存储是否足够
     device_available_status = db.Column(db.Integer, default=0)  # 设备物理状态：0，设备完好；1，设备损坏；2，设备返还日本侧；3，设备借出
     device_online_status = db.Column(db.Integer, default=0)  # 设备在线状态：0，设备状态未上报；1，设备正在使用中；2，设备已停止使用
+    # 【注：上述字段于 2021/1/12 暂不使用】
+    device_online_time = db.Column(db.DateTime)  # 设备上次在线时间
     # TODO：关联表
     tips = db.Column(db.VARCHAR(255))  # 备注
     backup_1 = db.Column(db.VARCHAR(255))  # 备用字段 1
