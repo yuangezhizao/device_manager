@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     backup_2 = db.Column(db.VARCHAR(255))  # 备用字段 2
     backup_3 = db.Column(db.VARCHAR(255))  # 备用字段 3
     member_since = db.Column(db.DateTime(), server_default=func.now())
-    last_seen = db.Column(db.DateTime(), server_default=func.now(), onupdate=func.now())
+    last_seen = db.Column(db.DateTime(), server_default=func.now(), onupdate=func.now())  # 性能优化，不再显示
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
