@@ -39,7 +39,7 @@ class DeviceModelViewAuth(ModelView):
                          next_person='下个所有者', device_available_status='设备物理状态', device_online_time='设备上次在线时间',
                          tips='备注', backup_1='备用字段 1', backup_2='备用字段 2', backup_3='备用字段 3',
                          create_time='创建时间', update_time='更新时间')
-    column_exclude_list = ['device_online_status']
+    column_exclude_list = ['device_online_status', 'backup_1', 'backup_2', 'backup_3']
 
     def is_accessible(self):
         if current_user.is_authenticated:
@@ -59,6 +59,7 @@ class UserModelViewAuth(ModelView):
     column_display_pk = True
     column_labels = dict(id='No.', username='用户 ID', email='电子邮箱', password_hash='密码', name='昵称', backup_1='备用字段 1',
                          backup_2='备用字段 2', backup_3='备用字段 3', member_since='注册时间', last_seen='上次在线时间')
+    column_exclude_list = ['backup_1', 'backup_2', 'backup_3']
 
     def is_accessible(self):
         if current_user.is_authenticated:
