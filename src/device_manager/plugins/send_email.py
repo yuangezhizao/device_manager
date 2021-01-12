@@ -24,7 +24,7 @@ def send_transfer_email(serial, recipients, cc):
                   sender=('ALSI ES CANoe 设备管理系统', 'chenyuan.gao@alsi.cn'),
                   recipients=[recipients],
                   cc=cc)
-    msg.body = f'序列号为【{serial}】的 CANoe 设备开始转移，请及时确认<br>详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
+    msg.body = f'序列号为【{serial}】的 CANoe 设备开始转移，请及时确认！详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
     app = flask.current_app._get_current_object()
     thread = Thread(target=async_send_mail, args=(app, msg))
     thread.start()
@@ -35,7 +35,7 @@ def send_confirm_email(serial, recipients, cc):
                   sender=('ALSI ES CANoe 设备管理系统', 'chenyuan.gao@alsi.cn'),
                   recipients=[recipients],
                   cc=cc)
-    msg.body = f'序列号为【{serial}】的 CANoe 设备已转移结束<br>详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
+    msg.body = f'序列号为【{serial}】的 CANoe 设备已转移结束。详情请参照：http://10.30.10.216:5000/transfer/device?serial={serial}'
     app = flask.current_app._get_current_object()
     thread = Thread(target=async_send_mail, args=(app, msg))
     thread.start()

@@ -67,10 +67,12 @@ def transfer_device():
                 return '这已经不是你的设备了'
             next_user_id = flask.request.form.get('next_user')
             next_user = User.query.filter_by(username=next_user_id).first_or_404()
+            now_user = transfer_device_data.now_person
+            # 邮件送信 CC 当前所有者
             transfer_device_data.next_person = next_user
             transfer_device_data.save()
             try:
-                send_transfer_email(serial, next_user.email, current_user.email)
+                send_transfer_email(serial, next_user.email, now_user.email)
             except Exception as e:
                 print(e)
             return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
@@ -80,13 +82,13 @@ def transfer_device():
                 if transfer_device_data.next_person != current_user:
                     return '此设备并不需要你进行确认'
                 next_user = transfer_device_data.next_person
-                now_person = transfer_device_data.now_person
-                # 邮件提醒
+                now_user = transfer_device_data.now_person
+                # 邮件送信 CC 当前所有者
                 transfer_device_data.now_person = next_user
                 transfer_device_data.next_person = None
                 transfer_device_data.save()
                 try:
-                    send_confirm_email(serial, now_person.email, current_user.email)
+                    send_confirm_email(serial, now_user.email, next_user.email)
                 except Exception as e:
                     print(e)
                 if 'transfer' not in flask.request.referrer:
