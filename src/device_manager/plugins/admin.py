@@ -40,6 +40,9 @@ class DeviceModelViewAuth(ModelView):
                          tips='备注', backup_1='备用字段 1', backup_2='备用字段 2', backup_3='备用字段 3',
                          create_time='创建时间', update_time='更新时间')
     column_exclude_list = ['device_online_status', 'backup_1', 'backup_2', 'backup_3']
+    form_choices = {
+        'device_available_status': [(0, '设备完好'), (1, '设备损坏'), (2, '设备返还日本侧'), (3, '设备借出')],
+    }
 
     def is_accessible(self):
         if current_user.is_authenticated:
