@@ -6,6 +6,7 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
 """
+import datetime
 import os
 import time
 
@@ -73,6 +74,12 @@ def register_blueprints(app):
 
 
 def register_template_context(app):
+    @app.context_processor
+    def my_context_processor():
+        return {
+            'time': str(datetime.datetime.now())[:-7],
+        }
+
     @app.before_request
     def before_request():
         flask.g.start_time = time.time()
