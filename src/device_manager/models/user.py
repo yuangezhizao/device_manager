@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
         super(User, self).__init__(**kwargs)
 
     def __repr__(self):
-        return f'<User {self.username, self.name}>'
+        return self.name
 
     def set_password(self, password):
         # from werkzeug.security import generate_password_hash
