@@ -75,9 +75,13 @@ def register_blueprints(app):
 def register_template_context(app):
     @app.before_request
     def before_request():
-        # if current_user.is_authenticated:
-        #     current_user.ping()
         flask.g.start_time = time.time()
+        if current_user.is_authenticated:
+            # current_user.ping()
+            if 'change_passwd' not in flask.request.url:
+                if current_user.username == current_user.password_hash:
+                    flask.flash(f'初次登录需修改默认密码！', 'red')
+                    return flask.redirect(flask.url_for('main.auth_change_passwd'))
 
     @app.after_request
     def after_request(response):
