@@ -6,6 +6,8 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2020~2021 yuangezhizao <root@yuangezhizao.cn>
 """
+import datetime
+
 import flask
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -108,8 +110,7 @@ def manage_index():
 @bp.route('/report')
 def report():
     serial = flask.request.args.get('serial')
-    status = int(flask.request.args.get('status', 1))
     device = Device.query.filter_by(serial=serial).first_or_404()
-    device.device_online_status = status
+    device.device_online_time = str(datetime.datetime.now())[:-7]
     device.save()
-    return f'序列号为【{serial}】的 CANoe 设备在线状态已更新为：{status}'
+    return f'序列号为【{serial}】的 CANoe 设备上次在线时间已更新'
