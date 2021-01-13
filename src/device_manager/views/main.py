@@ -49,6 +49,19 @@ def auth_index():
     return flask.render_template('auth/index.html')
 
 
+@bp.route('/auth/change_passwd', methods=['GET', 'POST'])
+@login_required
+def auth_change_passwd():
+    if flask.request.method == 'POST':
+        password = flask.request.form.get('password')
+        user = User.query.filter_by(username=current_user.username).first_or_404()
+        user.password_hash = password
+        user.save()
+        flask.flash(f'修改密码为【{password}】成功！', 'brown')
+        return flask.redirect(flask.url_for('main.site_index'))
+    return flask.render_template('auth/change_passwd.html')
+
+
 @bp.route('/auth/logout')
 @login_required
 def auth_logout():

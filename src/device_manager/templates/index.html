@@ -1,5 +1,7 @@
 {% extends "/base.html" %}
 
+{% from 'macros.html' import message_part with context %}
+
 {% block title %}ALSI ES CANoe 设备管理系统{% endblock %}
 
 {% block content %}
@@ -7,6 +9,8 @@
         <h2 class="ui header">欢迎访问 ヽ(･ω･´ﾒ)</h2>
         <p>ALSI ES CANoe 设备管理系统</p>
     </div>
+
+    {{ message_part() }}
 
     {% if current_user.is_authenticated %}
         <h4 class="ui top attached block blue header">
