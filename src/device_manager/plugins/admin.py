@@ -39,7 +39,8 @@ class DeviceModelViewAuth(ModelView):
                          next_person='下个所有者', device_available_status='设备物理状态', device_online_time='设备上次在线时间',
                          tips='备注', backup_1='备用字段 1', backup_2='备用字段 2', backup_3='备用字段 3',
                          create_time='创建时间', update_time='更新时间')
-    column_exclude_list = ['device_online_status', 'create_time', 'update_time', 'backup_1', 'backup_2', 'backup_3']
+    column_exclude_list = ['id', 'device_online_status', 'create_time', 'update_time', 'backup_1', 'backup_2',
+                           'backup_3']
     form_choices = {
         'device_available_status': [(0, '设备完好'), (1, '设备损坏'), (2, '设备返还日本侧'), (3, '设备借出')],
     }
