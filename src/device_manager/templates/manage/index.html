@@ -29,7 +29,7 @@
                     <th>当前所有者</th>
                     {#                    <th>下个所有者</th>#}
                     <th>设备可用性状态</th>
-                    <th>设备上次在线时间</th>
+                    <th>设备在线状态</th>
                     <th>备注</th>
                     {#                    <th>创建时间</th>#}
                     <th>更新时间</th>
@@ -87,11 +87,14 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if data.device_online_time != None %}
-                                {{ data.device_online_time }}
+                            {% if time - data.device_online_time < device_offline_timedelta %}
+                                使用中
+                                <i class="notched circle red loading icon"></i>
                             {% else %}
-                                未知
+                                未使用
+                                <i class="circle green icon"></i>
                             {% endif %}
+                            {{ moment(data.device_online_time_utc).fromNow(refresh=True) }}
                         </td>
                         <td>
                             {{ data.tips }}

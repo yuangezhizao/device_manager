@@ -122,7 +122,11 @@ def transfer_device():
 @login_required
 def manage_index():
     manage_index_data = Device.query.order_by(Device.id.asc()).all()
-    return flask.render_template('manage/index.html', manage_index_data=manage_index_data)
+    device_offline_timedelta = datetime.timedelta(minutes=20)
+    for data in manage_index_data:
+        data.device_online_time_utc = data.device_online_time - datetime.timedelta(hours=8)
+    return flask.render_template('manage/index.html', device_offline_timedelta=device_offline_timedelta,
+                                 manage_index_data=manage_index_data)
 
 
 @bp.route('/report')
