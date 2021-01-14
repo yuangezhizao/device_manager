@@ -77,7 +77,7 @@ def register_template_context(app):
     @app.context_processor
     def my_context_processor():
         return {
-            'time': str(datetime.datetime.now())[:-7],
+            'time': datetime.datetime.now(),
         }
 
     @app.before_request

@@ -73,6 +73,7 @@ def auth_logout():
 @bp.route('/transfer/device', methods=['GET', 'POST'])
 @login_required
 def transfer_device():
+    device_offline_timedelta = datetime.timedelta(minutes=20)
     serial = flask.request.args.get('serial')
     transfer_device_data = Device.query.filter_by(serial=serial).first_or_404()
     if flask.request.method == 'POST':
@@ -110,7 +111,8 @@ def transfer_device():
                     return flask.redirect(flask.url_for('main.site_index'))
                 return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
     user_all = User.query.order_by(User.id.asc()).all()
-    return flask.render_template('transfer/device.html', transfer_device_data=transfer_device_data, user_all=user_all)
+    return flask.render_template('transfer/device.html', transfer_device_data=transfer_device_data, user_all=user_all,
+                                 device_offline_timedelta=device_offline_timedelta)
 
 
 @bp.route('/manage/index')

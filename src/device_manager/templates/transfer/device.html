@@ -72,12 +72,15 @@
                                     {% endif %}
                                 </div>
                                 <div class="ui attached blue segment">
-                                    <div class="ui blue horizontal label">设备上次在线时间</div>
-                                    {% if transfer_device_data.device_online_time != None %}
-                                        {{ transfer_device_data.device_online_time }}
+                                    <div class="ui blue horizontal label">设备在线状态</div>
+                                    {% if time - transfer_device_data.device_online_time < device_offline_timedelta %}
+                                        使用中
+                                        <i class="notched circle red loading icon"></i>
                                     {% else %}
-                                        未知
+                                        未使用
+                                        <i class="circle green icon"></i>
                                     {% endif %}
+                                    {{ moment(transfer_device_data.device_online_time).fromNow(refresh=True) }}
                                 </div>
                                 <div class="ui attached pink segment">
                                     <div class="ui pink horizontal label">备注</div>
@@ -101,7 +104,7 @@
                             <input name="func" value="start_transfer" type="hidden">
                             <div class="field">
                                 <label>转移用户至</label>
-                                <div class="ui selection search selection dropdown">
+                                <div class="ui search selection dropdown">
                                     <input name="next_user" type="hidden">
                                     <div class="default text">请选择</div>
                                     <div class="menu">
