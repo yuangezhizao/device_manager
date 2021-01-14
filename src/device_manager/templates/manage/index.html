@@ -87,17 +87,21 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if data.device_online_time != None %}
-                                {% if time - data.device_online_time < device_offline_timedelta %}
-                                    使用中
-                                    <i class="notched circle red loading icon"></i>
-                                {% else %}
-                                    未使用
-                                    <i class="circle green icon"></i>
-                                {% endif %}
-                                {{ moment(data.device_online_time_utc).fromNow(refresh=True) }}
+                            {% if 'Disc' in data.type %}
+                                -
                             {% else %}
-                                未知
+                                {% if data.device_online_time != None %}
+                                    {% if time - data.device_online_time < device_offline_timedelta %}
+                                        使用中
+                                        <i class="notched circle red loading icon"></i>
+                                    {% else %}
+                                        未使用
+                                        <i class="circle green icon"></i>
+                                    {% endif %}
+                                    {{ moment(data.device_online_time_utc).fromNow(refresh=True) }}
+                                {% else %}
+                                    未知
+                                {% endif %}
                             {% endif %}
                         </td>
                         <td>
@@ -124,10 +128,11 @@
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.3/dist/js/jquery.tablesorter.min.js"></script>
+    <script src="{{ url_for('static', filename='/static/js/jquery.tablesorter.min.js') }}"></script>
+
     <script>
         $(document).ready(function () {
-                $("#table").tablesorter();
+                $("#table").tablesorter({sortList: [[9, 0]]});
             }
         );
     </script>
