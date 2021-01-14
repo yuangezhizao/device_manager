@@ -136,6 +136,7 @@ def manage_index():
 @bp.route('/report')
 def report():
     serial = flask.request.args.get('serial')
+    serial.zfill(6)
     device = Device.query.filter_by(serial=serial).first_or_404()
     device.device_online_time = datetime.datetime.now()
     device.save()
