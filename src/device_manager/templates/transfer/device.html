@@ -80,7 +80,7 @@
                                         未使用
                                         <i class="circle green icon"></i>
                                     {% endif %}
-                                    {{ moment(transfer_device_data.device_online_time).fromNow(refresh=True) }}
+                                    {{ moment(device_online_time_utc).fromNow(refresh=True) }}
                                 </div>
                                 <div class="ui attached pink segment">
                                     <div class="ui pink horizontal label">备注</div>

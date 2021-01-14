@@ -73,7 +73,6 @@ def auth_logout():
 @bp.route('/transfer/device', methods=['GET', 'POST'])
 @login_required
 def transfer_device():
-    device_offline_timedelta = datetime.timedelta(minutes=20)
     serial = flask.request.args.get('serial')
     transfer_device_data = Device.query.filter_by(serial=serial).first_or_404()
     if flask.request.method == 'POST':
@@ -111,8 +110,12 @@ def transfer_device():
                     return flask.redirect(flask.url_for('main.site_index'))
                 return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
     user_all = User.query.order_by(User.id.asc()).all()
+    device_offline_timedelta = datetime.timedelta(minutes=20)
+    device_online_time_utc = transfer_device_data.device_online_time - datetime.timedelta(hours=8)
+    # 转换为 UTC 时间
     return flask.render_template('transfer/device.html', transfer_device_data=transfer_device_data, user_all=user_all,
-                                 device_offline_timedelta=device_offline_timedelta)
+                                 device_offline_timedelta=device_offline_timedelta,
+                                 device_online_time_utc=device_online_time_utc)
 
 
 @bp.route('/manage/index')
@@ -126,6 +129,6 @@ def manage_index():
 def report():
     serial = flask.request.args.get('serial')
     device = Device.query.filter_by(serial=serial).first_or_404()
-    device.device_online_time = str(datetime.datetime.now())[:-7]
+    device.device_online_time = datetime.datetime.now()
     device.save()
     return f'序列号为【{serial}】的 CANoe 设备上次在线时间已更新'
