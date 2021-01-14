@@ -87,14 +87,18 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if time - data.device_online_time < device_offline_timedelta %}
-                                使用中
-                                <i class="notched circle red loading icon"></i>
+                            {% if data.device_online_time is not None %}
+                                {% if time - data.device_online_time < device_offline_timedelta %}
+                                    使用中
+                                    <i class="notched circle red loading icon"></i>
+                                {% else %}
+                                    未使用
+                                    <i class="circle green icon"></i>
+                                {% endif %}
+                                {{ moment(data.device_online_time_utc).fromNow(refresh=True) }}
                             {% else %}
-                                未使用
-                                <i class="circle green icon"></i>
+                                未知
                             {% endif %}
-                            {{ moment(data.device_online_time_utc).fromNow(refresh=True) }}
                         </td>
                         <td>
                             {{ data.tips }}

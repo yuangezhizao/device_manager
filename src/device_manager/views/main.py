@@ -111,7 +111,10 @@ def transfer_device():
                 return flask.redirect(flask.url_for('main.transfer_device', serial=serial))
     user_all = User.query.order_by(User.id.asc()).all()
     device_offline_timedelta = datetime.timedelta(minutes=20)
-    device_online_time_utc = transfer_device_data.device_online_time - datetime.timedelta(hours=8)
+    if transfer_device_data.device_online_time is not None:
+        device_online_time_utc = transfer_device_data.device_online_time - datetime.timedelta(hours=8)
+    else:
+        device_online_time_utc = ''
     # 转换为 UTC 时间
     return flask.render_template('transfer/device.html', transfer_device_data=transfer_device_data, user_all=user_all,
                                  device_offline_timedelta=device_offline_timedelta,
@@ -124,7 +127,8 @@ def manage_index():
     manage_index_data = Device.query.order_by(Device.id.asc()).all()
     device_offline_timedelta = datetime.timedelta(minutes=20)
     for data in manage_index_data:
-        data.device_online_time_utc = data.device_online_time - datetime.timedelta(hours=8)
+        if data.device_online_time is not None:
+            data.device_online_time_utc = data.device_online_time - datetime.timedelta(hours=8)
     return flask.render_template('manage/index.html', device_offline_timedelta=device_offline_timedelta,
                                  manage_index_data=manage_index_data)
 
