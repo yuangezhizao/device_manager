@@ -39,9 +39,16 @@ def get_serial():
             return 0
 
 
+def get_vtest_studio_serial():
+    # TBD
+    pass
+
+
 def report():
     import platform
     serial = get_serial()
+    if serial == 0:
+        serial = get_vtest_studio_serial()
     hostname = socket.gethostname()
     user = getpass.getuser()
     platform = platform.platform()
