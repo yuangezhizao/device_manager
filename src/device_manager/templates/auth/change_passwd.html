@@ -17,6 +17,30 @@
             </div>
         </h2>
         {{ message_part() }}
+        <div class="ui warning message">
+            <div class="header">
+                注意事项
+            </div>
+            <ul class="list">
+                <li>1，若点击按钮无法提交，请刷新页面后重试</li>
+                <li>2，如果仍然无法提交，请更换现代浏览器（<a href="https://www.google.cn/intl/zh-CN/chrome" target="_blank">
+                    <i class="iconfont icon-chrome"></i>
+                    Chrome
+                    <span>谷歌</span>
+                </a>/
+                    <a href="https://www.mozilla.org/zh-CN/firefox/new" target="_blank">
+                        <i class="iconfont icon-firefox"></i>
+                        Firefox<span>火狐</span>
+                    </a>
+                    /
+                    <a href="https://www.microsoftedgeinsider.com" target="_blank">
+                        <i class="iconfont icon-edge"></i>
+                        Edge
+                        <span>微软</span>
+                    </a>等）
+                </li>
+            </ul>
+        </div>
         <form class="ui large form" action="" method="POST">
             <div class="ui stacked segment">
                 <div class="field">
@@ -35,7 +59,7 @@
                         <i class="lock icon"></i>
                     </div>
                 </div>
-                <input class="ui green submit button" type="submit" name="submit" value="提交">
+                <input class="ui green submit button" type="submit" name="submit" value="点击此按钮提交">
             </div>
         </form>
     </div>
