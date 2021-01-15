@@ -7,3 +7,5 @@ Flask-Migrate
 Flask-Moment
 python-dotenv
 Flask-BabelEX
+pycparser
+pythonnet
