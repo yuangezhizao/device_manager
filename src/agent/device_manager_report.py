@@ -28,6 +28,8 @@ def get_serial():
         return 0
 
     # 55:vn1610, 57:vn1630, 63:vn1611 81：vn7610,
+    if myDriverConfig.channelCount == 0:
+        return 0
     for i in range(myDriverConfig.channelCount):
         serial = myDriverConfig.channel[i].serialNumber
         print(f'serial：{serial}')
@@ -41,7 +43,7 @@ def get_serial():
 
 def get_vtest_studio_serial():
     # TBD
-    pass
+    return 0
 
 
 def report():
@@ -53,7 +55,7 @@ def report():
     user = getpass.getuser()
     platform = platform.platform()
     return requests.get(
-        f'http://10.30.10.216:5000/report?serial={serial}&hostname={hostname}&user={user}&platform={platform}&version=100').text
+        f'http://10.30.10.216:5000/report?serial={serial}&hostname={hostname}&user={user}&platform={platform}&version=101').text
 
 
 if __name__ == '__main__':
