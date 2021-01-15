@@ -136,8 +136,8 @@ def manage_index():
 @bp.route('/report')
 def report():
     serial = flask.request.args.get('serial')
-    serial.zfill(6)
-    device = Device.query.filter_by(serial=serial).first_or_404()
+    fmt_serial = serial.zfill(6)
+    device = Device.query.filter_by(serial=fmt_serial).first_or_404()
     device.device_online_time = datetime.datetime.now()
     device.save()
-    return f'序列号为【{serial}】的 CANoe 设备上次在线时间已更新'
+    return f'序列号为【{fmt_serial}】的 CANoe 设备上次在线时间已更新'
