@@ -136,10 +136,14 @@ def manage_index():
 @bp.route('/report')
 def report():
     serial = flask.request.args.get('serial')
-    hostname = flask.request.args.get('hostname')
+    username = flask.request.args.get('user')
     fmt_serial = serial.zfill(6)
     device = Device.query.filter_by(serial=fmt_serial).first_or_404()
     device.device_online_time = datetime.datetime.now()
-    device.backup_1 = hostname
+    try:
+        name = User.query.filter_by(username=username).first().name
+        device.backup_1 = name
+    except Exception:
+        print(f'用户 ID 为【{username}】的用户不存在')
     device.save()
     return f'序列号为【{fmt_serial}】的 CANoe 设备上次在线时间已更新'
